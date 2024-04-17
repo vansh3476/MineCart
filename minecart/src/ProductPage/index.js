@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
-import { Card, Col, Input, Row } from 'antd';
+import { Button, Card, Col, Input, Row } from 'antd';
+import { staticProducts } from '../constant';
 
 const { Meta } = Card;
 
@@ -8,12 +9,15 @@ const products = JSON.parse(localStorage.getItem('products')) || [];
 
 const ProductPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const filteredProducts = products.filter((product) =>
+  const allProduct=[...staticProducts,...products]
+  const filteredProducts = allProduct.filter((product) =>
     product.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
   return (
     <div style={{ padding: '20px' }}>
+    <div style={{marginBottom:'10px'}}>
+    <Button type="primary" href="/">Back To Home</Button>
+    </div>
       <Input
         placeholder="Search by product name"
         onChange={(e) => setSearchQuery(e.target.value)}
@@ -21,20 +25,23 @@ const ProductPage = () => {
       />
       <Row gutter={[16,16]}>
         {filteredProducts.map((product) => (
-          <Col span={8} key={product.id}>
+          <div style={{marginRight:'10px'}}>
             <Card
               hoverable
-              cover={<img alt={product.name} src={product.image} style={{ width:'100px',height: '100px' }} />}
-              bodyStyle={{ height: '100px' }}
+              cover={<img alt={product.name} src={product.image} style={{ width:'200px',height: '100px' }} />}
             >
-              <Meta title={product.name} description={product.description} />
+            <div>
+              <h4>{product.name}</h4>
+              <h5>{product.description}</h5>
+            </div>
               <div style={{ marginTop: '10px', fontWeight: 'bold' }}>
                 {product.price}
               </div>
             </Card>
-          </Col>
+          </div>
         ))}
       </Row>
+      
     </div>
   );
 };
