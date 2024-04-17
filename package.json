@@ -1,8 +1,0 @@
-{
-  "devDependencies": {
-    "sass": "^1.75.0"
-  },
-  "dependencies": {
-    "antd": "^5.16.2"
-  }
-}
