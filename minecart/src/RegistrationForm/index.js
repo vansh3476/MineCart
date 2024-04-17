@@ -17,7 +17,7 @@ export const RegistrationForm = () => {
   };
   
   return (
-    <div>
+    <div style={{marginTop:"150px"}}>
       <Form
         name="basic"
         labelCol={{
